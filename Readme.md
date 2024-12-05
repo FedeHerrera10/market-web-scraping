@@ -2,15 +2,12 @@
 ## Acerca de este proyecto 
 Este proyecto tiene como proposito buscar productos
 en los supermercados argentino como vea,masonline,carrefour.
+
 Nota:Este proyecto es a modo de estudio.
 
 ### Creado con
 
 Node Js
-
-
-
-
 
 ### Prerequisites
 
