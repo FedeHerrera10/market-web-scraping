@@ -1,4 +1,4 @@
- import { searchInCarrefour, searchInChangoMas, searchInVea } from "./scraping.js";
+ import { searchInAllStores} from "./scraping.js";
 
 
 import express  from 'express';
@@ -11,11 +11,10 @@ app.use(cors())
 
 app.get('/:producto',async(req,res)=>{
   try {
-    const params = req.params;
-     const dataVea = await searchInVea(params.producto);
-     const dataChangoMas = await searchInChangoMas(params.producto);
-     const dataCarrefour = await searchInCarrefour(params.producto);
-     const data = fusionData(dataVea,dataChangoMas,dataCarrefour);
+     const params = req.params;
+     console.time('searchInAllStores');
+     const data = await searchInAllStores(params.producto);
+     console.timeEnd('searchInAllStores');
      const groupedProducts = groupBySimilarity(data, 10);
      const sortedProducts = flattenClusters(groupedProducts);
      res.send(sortedProducts); 

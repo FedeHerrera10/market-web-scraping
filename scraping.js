@@ -1,9 +1,9 @@
 import puppeteer from 'puppeteer';
+import { fusionData } from './util.js';
 
 const searchInVea = async (params) => {
  const browser =  await puppeteer.launch({
-    headless:'shell',
-    slowMo:400
+    headless:'shell'
  });
  
  const page = await browser.newPage();
@@ -156,11 +156,21 @@ const searchInCarrefour = async (params) => {
   };
 
 
+  async function searchInAllStores(params) {
+   const [dataVea, dataChangoMas, dataCarrefour] = await Promise.all([
+     searchInVea(params),
+     searchInChangoMas(params),
+     searchInCarrefour(params)
+   ]);
+   
+   const allData = fusionData(dataVea,dataChangoMas,dataCarrefour);
+   return allData;
+ }
 
 
 
 
-export {searchInVea,searchInChangoMas,searchInCarrefour};
+export {searchInAllStores};
 
 
 
